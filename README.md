@@ -56,3 +56,20 @@ COPY --from=build /target/*.jar app.jar
 
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
 ```
+# Minio
+```yml
+services:
+  minio:
+    image: minio/minio:RELEASE.2025-01-20T14-49-07Z
+    container_name: minio1
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ROOTUSER
+      MINIO_ROOT_PASSWORD: "CHANGEME123"
+    volumes:
+      - "H:/Projetos/minio:/data"
+    command: server /data --console-address ":9001" --address ":9000"
+```
+
